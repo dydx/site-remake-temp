@@ -5,6 +5,6 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     uglify = require('gulp-uglify');
 
-gulp.task('default', fuction() {
+gulp.task('default', function() {
     console.log('Staring Default Build');
 });
