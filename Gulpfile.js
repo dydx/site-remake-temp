@@ -33,11 +33,11 @@ gulp.task('font-awesome-optimization', function() {
 // re-encode images to WebP format, 25% savings
 // on file size. HUGE SAVINGS!
 gulp.task('image-optimization', function() {
-    return gulp.src('images/*')
+    return gulp.src('images/full/*')
     .pipe(webp())
     .pipe(gulp.dest('images/min'));
 });
-    
+
 
 gulp.task('watch', function() {
     gulp.watch('assets/sass/*.scss', ['sass-minification']);
