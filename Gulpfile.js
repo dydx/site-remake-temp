@@ -3,7 +3,8 @@ var gulp        = require('gulp'),
     sass        = require('gulp-ruby-sass'),
     webp        = require('gulp-webp'),
     uglify      = require('gulp-uglify'),
-    transform   = require('vinyl-transform');
+    source      = require('vinyl-source-stream'),
+    buffer      = require('vinyl-buffer');
 
 gulp.task('sass-minification', function() {
     // API for gulp-ruby-sass is different than gulp-sass :(
@@ -12,17 +13,15 @@ gulp.task('sass-minification', function() {
 });
 
 gulp.task('scripts-minification', function() {
-
-    // handle streaming and buffering in one pass
-    var browserified = transform(function(filename) {
-        return browserify(filename)
-            .bundle();
+    var b = browserify({
+        entries: 'assets/js/main.js',
+        debug: true
     });
 
-    return gulp.src('/assets/js')
-        .pipe(browserified)
-        .pipe(uglify)
-        .pipe(gulp.dest('/assets/js/bundle.js'));
+    b.bundle()
+        .pipe(source('bundle.js'))
+        .pipe(buffer())
+        .pipe(gulp.dest('assets/js'));
 });
 
 gulp.task('watch', function() {
