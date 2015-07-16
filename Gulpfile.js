@@ -30,6 +30,8 @@ gulp.task('font-awesome-optimization', function() {
         .pipe(gulp.dest('assets/css'));
 });
 
+// re-encode images to WebP format, 25% savings
+// on file size. HUGE SAVINGS!
 gulp.task('image-optimization', function() {
     return gulp.src('images/header.jpg')
     .pipe(webp())
